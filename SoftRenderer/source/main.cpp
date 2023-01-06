@@ -44,15 +44,18 @@ int main(int argc, char** argv) {
 	int width = 500;
 	int height = 500;
 
-	Model* model = new Model("obj/african_head.obj"); //代码方式构造model
+	Model model = Model("obj/african_head.obj"); //创建model
 	TGAImage image(width, height, TGAImage::RGB);
-	for (int i = 0; i < model->nfaces(); i++) {
-		std::vector<int> face = model->face(i); //创建face数组用于保存一个face的三个顶点坐标
+	for (int i = 0; i < model.nfaces(); i++) {
+		std::vector<int> face = model.face(i); //得到三角形的索引数组，三角形有三个点，face数组存放三顶点的索引
 		for (int j = 0; j < 3; j++) {
-			Vec3f v0 = model->vert(face[j]);
-			Vec3f v1 = model->vert(face[(j + 1) % 3]);
+			//拿到索引后 用索引得到顶点位置
 			//根据顶点v0和v1画线
-			//先要进行模型坐标到屏幕坐标的转换。  (-1,-1)对应(0,0)   (1,1)对应(width,height)
+			//循环三次 0-1 1-2 2-0
+			//这样就画完了三角形的三条边
+			Vec3f v0 = model.vert(face[j]);
+			Vec3f v1 = model.vert(face[(j + 1) % 3]);
+			//下面的计算是为了把model移到屏幕中心
 			int x0 = (v0.x + 1.) * width / 2.;
 			int y0 = (v0.y + 1.) * height / 2.;
 			int x1 = (v1.x + 1.) * width / 2.;
@@ -63,6 +66,5 @@ int main(int argc, char** argv) {
 	}
 	//image.flip_vertically();
 	image.write_tga_file("output.tga");
-	delete model;
 	return 0;
 }
