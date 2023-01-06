@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 	int width = 500;
 	int height = 500;
 
-	Model model = Model("obj/cube.obj"); //创建model
+	Model model = Model("obj/african_head.obj"); //创建model
 	TGAImage image(width, height, TGAImage::RGB);
 	for (int i = 0; i < model.nfaces(); i++) {
 		std::vector<int> face = model.face(i); //得到三角形的索引数组，三角形有三个点，face数组存放三顶点的索引
@@ -56,8 +56,6 @@ int main(int argc, char** argv) {
 			Vec3f v0 = model.vert(face[j]);
 			Vec3f v1 = model.vert(face[(j + 1) % 3]);
 			//下面的计算是为了把model移到屏幕中心
-			//model 范围[-1,1] 我们把范围转化到[0, width/height]
-			//目前不考虑z轴 只做2D的渲染
 			int x0 = (v0.x + 1.) * width / 2.;
 			int y0 = (v0.y + 1.) * height / 2.;
 			int x1 = (v1.x + 1.) * width / 2.;
