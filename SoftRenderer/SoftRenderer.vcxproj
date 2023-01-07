@@ -145,12 +145,14 @@
   <ItemGroup>
     <ClInclude Include="source\geometry.h" />
     <ClInclude Include="source\model.h" />
+    <ClInclude Include="source\our_gl.h" />
     <ClInclude Include="source\tgaimage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\geometry.cpp" />
     <ClCompile Include="source\model.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\our_gl.cpp" />
     <ClCompile Include="source\tgaimage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
